@@ -4,15 +4,43 @@
     <base href="/">
     <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link media="all" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <link href="/bower_components/angular-dialog-service/dist/dialogs.min.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
     <script src="/bower_components/lodash/dist/lodash.min.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/bower_components/angular-dialog-service/dist/dialogs.min.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/controllers/HomeController.js"></script>
+    <script src="/js/controllers/AnyRequestController.js"></script>
   </head>
   <body>
+
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <ul class="nav navbar-nav">
+            <li><a ui-sref="home">Overview</a></li>
+            <li><a ui-sref="home">Indices</a></li>
+            <li><a ui-sref="home">Browser</a></li>
+            <li><a ui-sref="home">Structured Query</a></li>
+            <li><a ui-sref="anyRequest">Any Request</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <ui-view></ui-view>
   </body>
 </html>

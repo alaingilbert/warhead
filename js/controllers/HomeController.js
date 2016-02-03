@@ -1,9 +1,9 @@
 var app = angular.module('warhead');
 
-app.controller('HomeController', function($scope) {
+app.controller('HomeController', function($scope, statePromise) {
 
   (function constructor() {
-    $scope.test = 'test';
+    $scope.indices = statePromise.data.metadata.indices;
   })();
 
 });
