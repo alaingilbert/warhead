@@ -2,8 +2,11 @@ var app = angular.module('warhead',
     ['ui.router',
      'ngSanitize',
      'ui.bootstrap',
+     'ui-notification',
      'ui.select',
      'dialogs.main']);
+
+app.constant('ENDPOINT', 'http://127.0.0.1:9200');
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider, dialogsProvider) {
   dialogsProvider.useBackdrop(true);
@@ -17,8 +20,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, dialo
     templateUrl: 'partials/home.html',
     controller: 'HomeController',
     resolve: {
-      statePromise: function($http) {
-        return $http.get('http://127.0.0.1:9200/_cluster/state');
+      statePromise: function($http, ENDPOINT) {
+        return $http.get(ENDPOINT + '/_cluster/state');
+      },
+      statusPromise: function($http, ENDPOINT) {
+        return $http.get(ENDPOINT + '/_status');
       },
     },
   })
@@ -28,8 +34,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, dialo
     controller: 'StructuredQueryController',
     reloadOnSearch: false,
     resolve: {
-      statusPromise: function($http) {
-        return $http.get('http://127.0.0.1:9200/_status');
+      statusPromise: function($http, ENDPOINT) {
+        return $http.get(ENDPOINT + '/_status');
       },
     },
   })
@@ -39,6 +45,17 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, dialo
     controller: 'AnyRequestController',
     reloadOnSearch: false,
     resolve: {
+    },
+  })
+  .state('indices', {
+    url: '/indices',
+    templateUrl: 'partials/indices.html',
+    controller: 'IndicesController',
+    reloadOnSearch: false,
+    resolve: {
+      statusPromise: function($http, ENDPOINT) {
+        return $http.get(ENDPOINT + '/_status');
+      },
     },
   });
 });
