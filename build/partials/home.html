@@ -6,17 +6,20 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th ng-repeat="indexName in indexes | orderBy: '' | filter: input.indexFilter">
-          {{indexName}}
+        <th ng-repeat="index in indexes | orderBy: ['-state', 'name'] | filter: {name: input.indexFilter}">
+          {{index.name}}
 
-          <div>
-            size: {{statusData.indices[indexName].index.size_in_bytes | bytes}}<br />
-            docs: {{statusData.indices[indexName].docs.num_docs}}
+          <div ng-if="index.state == 'open'">
+            size: {{statusData.indices[index.name].index.size_in_bytes | bytes}}<br />
+            docs: {{statusData.indices[index.name].docs.num_docs}}
+          </div>
+          <div ng-if="index.state == 'close'">
+            index: close
           </div>
 
           <div>
-            <span class="badge" ng-repeat="alias in stateData.metadata.indices[indexName].aliases">
-              <i ng-click="btnRemoveAliasClicked(indexName, alias)" class="fa fa-times discard"></i>
+            <span class="badge" ng-repeat="alias in stateData.metadata.indices[index.name].aliases">
+              <i ng-click="btnRemoveAliasClicked(index.name, alias)" class="fa fa-times discard"></i>
               {{alias}}
             </span>
           </div>
@@ -26,8 +29,8 @@
               Info <span class="caret"></span>
             </button>
             <ul uib-dropdown-menu role="menu">
-              <li role="menuitem"><a href="#" ng-click="btnIndexStatusClicked(indexName)">Index Status</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnIndexMetadataClicked(indexName)">Index Metadata</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnIndexStatusClicked(index.name)">Index Status</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnIndexMetadataClicked(index.name)">Index Metadata</a></li>
             </ul>
           </div>
 
@@ -36,12 +39,12 @@
               Actions <span class="caret"></span>
             </button>
             <ul uib-dropdown-menu role="menu">
-              <li role="menuitem"><a href="#" ng-click="btnNewAliasClicked(indexName)">New Alias...</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnRefreshClicked(indexName)">Refresh</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnFlushClicked(indexName)">Flush</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnCloseIndexClicked(indexName)" ng-if="stateData.metadata.indices[indexName].state == 'open'">Close</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnOpenIndexClicked(indexName)" ng-if="stateData.metadata.indices[indexName].state == 'close'">Open</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnDeleteClicked(indexName)">Delete...</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnNewAliasClicked(index.name)">New Alias...</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnRefreshClicked(index.name)">Refresh</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnFlushClicked(index.name)">Flush</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnCloseIndexClicked(index.name)" ng-if="index.state == 'open'">Close</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnOpenIndexClicked(index.name)" ng-if="index.state == 'close'">Open</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnDeleteClicked(index.name)">Delete...</a></li>
             </ul>
           </div>
 

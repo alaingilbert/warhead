@@ -50,8 +50,10 @@ app.controller('AnyRequestController', function($scope, $http, $sce, $location, 
   $scope.btnRequestClicked = function() {
     var url = $scope.input.baseUri + $scope.input.path;
     var payload = $scope.input.body;
-    $http.post(url, payload).then(function(res) {
+    $http[$scope.input.method](url, payload).then(function(res) {
       $scope.result = $sce.trustAsHtml(highlight(res.data));
+    }).catch(function(err) {
+      console.log(err);
     });
   };
 
