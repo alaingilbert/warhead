@@ -4,3 +4,12 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .boolean { color: blue; }
 .null { color: magenta; }
 .key { color: red; }
+
+.form-inline .ui-select-container {
+  display: inline-block;
+  vertical-align: middle;
+  width: 150px;
+}
+.form-inline .ui-select-toggle {
+  width: 150px;
+}

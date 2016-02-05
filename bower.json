@@ -24,7 +24,8 @@
     "lodash": "~4.2.0",
     "angular-dialog-service": "~5.2.11",
     "angular-sanitize": "~1.4.9",
-    "angular-animate": "~1.4.9"
+    "angular-animate": "~1.4.9",
+    "angular-ui-select": "~0.14.2"
   },
   "resolutions": {
     "angular-bootstrap": "~1.1.2"
