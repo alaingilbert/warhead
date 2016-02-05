@@ -6,7 +6,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th ng-repeat="index in indexes | orderBy: ['-state', 'name'] | filter: input.indexFilter">
+        <th ng-repeat="index in indexes | orderBy: ['-state', 'name'] | filter: {name: input.indexFilter}">
           {{index.name}}
 
           <div ng-if="index.state == 'open'">
