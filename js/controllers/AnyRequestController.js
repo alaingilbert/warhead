@@ -52,6 +52,8 @@ app.controller('AnyRequestController', function($scope, $http, $sce, $location, 
     var payload = $scope.input.body;
     $http.post(url, payload).then(function(res) {
       $scope.result = $sce.trustAsHtml(highlight(res.data));
+    }).catch(function(err) {
+      console.log(err);
     });
   };
 
