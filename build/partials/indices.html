@@ -1,0 +1,21 @@
+<div class="container-fluid">
+
+  <button class="btn btn-default" ng-click="btnNewIndexClicked()">New Index</button>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Size</th>
+        <th>Docs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="indice in indices | orderBy: ''">
+        <td>{{indice}}</td>
+        <td>{{statusData.indices[indice].index.size_in_bytes | bytes}}</td>
+        <td>{{statusData.indices[indice].docs.num_docs | megaNumber}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

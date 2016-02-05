@@ -1,0 +1,16 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">×</button>
+    <h4 class="modal-title" id="mySmallModalLabel">Create new alias for </h4>
+  </div>
+  <div class="modal-body">
+    <form name="form" novalidate>
+      <label>Alias Name</label>
+      <input type="text" class="form-control" ng-model="input.alias" required="required" ng-enter="btnCreateAliasClicked()" focus-me />
+    </form>
+  </div>
+  <div class="modal-footer">
+    <input type="button" value="Ok" class="btn btn-primary" ng-click="btnCreateAliasClicked()" ng-disabled="form.$invalid" />
+    <input type="button" value="Cancel" class="btn btn-default" ng-click="cancel()" />
+  </div>
+</div>
