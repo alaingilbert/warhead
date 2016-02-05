@@ -155,7 +155,8 @@ app.controller('HomeController', function($scope, statePromise, $uibModal,
     $scope.stateData = statePromise.data;
     $scope.statusData = statusPromise.data;
     $scope.indexes = _.reduce($scope.stateData.metadata.indices, function(memo, item, key) {
-      memo.push(key);
+      item.name = key;
+      memo.push(item);
       return memo;
     }, []);
   })();
