@@ -42,8 +42,8 @@
               <li role="menuitem"><a href="#" ng-click="btnNewAliasClicked(index.name)">New Alias...</a></li>
               <li role="menuitem"><a href="#" ng-click="btnRefreshClicked(index.name)">Refresh</a></li>
               <li role="menuitem"><a href="#" ng-click="btnFlushClicked(index.name)">Flush</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnCloseIndexClicked(index.name)" ng-if="stateData.metadata.indices[index.name].state == 'open'">Close</a></li>
-              <li role="menuitem"><a href="#" ng-click="btnOpenIndexClicked(index.name)" ng-if="stateData.metadata.indices[index.name].state == 'close'">Open</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnCloseIndexClicked(index.name)" ng-if="index.state == 'open'">Close</a></li>
+              <li role="menuitem"><a href="#" ng-click="btnOpenIndexClicked(index.name)" ng-if="index.state == 'close'">Open</a></li>
               <li role="menuitem"><a href="#" ng-click="btnDeleteClicked(index.name)">Delete...</a></li>
             </ul>
           </div>
