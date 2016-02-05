@@ -9,9 +9,12 @@
         <th ng-repeat="index in indexes | orderBy: ['-state', 'name'] | filter: input.indexFilter">
           {{index.name}}
 
-          <div>
+          <div ng-if="index.state == 'open'">
             size: {{statusData.indices[index.name].index.size_in_bytes | bytes}}<br />
             docs: {{statusData.indices[index.name].docs.num_docs}}
+          </div>
+          <div ng-if="index.state == 'close'">
+            index: close
           </div>
 
           <div>
