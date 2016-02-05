@@ -57,5 +57,13 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, dialo
         return $http.get(ENDPOINT + '/_status');
       },
     },
+  })
+  .state('browser', {
+    url: '/browser',
+    templateUrl: 'partials/browser.html',
+    controller: 'BrowserController',
+    reloadOnSearch: false,
+    resolve: {
+    },
   });
 });
