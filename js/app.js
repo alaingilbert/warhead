@@ -4,6 +4,7 @@ var app = angular.module('warhead',
      'ui.bootstrap',
      'ui-notification',
      'ui.select',
+     'frapontillo.bootstrap-switch',
      'dialogs.main']);
 
 app.constant('ENDPOINT', 'http://127.0.0.1:9200');
@@ -36,6 +37,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, dialo
     resolve: {
       statusPromise: function($http, ENDPOINT) {
         return $http.get(ENDPOINT + '/_status');
+      },
+      statePromise: function($http, ENDPOINT) {
+        return $http.get(ENDPOINT + '/_cluster/state');
       },
     },
   })

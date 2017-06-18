@@ -6,6 +6,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th></th>
         <th ng-repeat="index in indexes | orderBy: ['-state', 'name'] | filter: {name: input.indexFilter}">
           {{index.name}}
 
@@ -53,7 +54,15 @@
     </thead>
     <tbody>
       <tr>
-        <td></td>
+        <td>Unassigned</td>
+      </tr>
+      <tr ng-repeat="(nodeId, node) in stateData.routing_nodes.nodes">
+        <td>{{stateData.nodes[nodeId].name}}</td>
+        <td ng-repeat="index in indexes | orderBy: ['-state', 'name'] | filter: {name: input.indexFilter}">
+          <span ng-repeat="(shardIdx, shard) in stateData.routing_table.indices[index.name].shards">
+            <i class="fa fa-square"></i>
+          </span>
+        </td>
       </tr>
     </tbody>
   </table>

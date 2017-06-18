@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
+
       <div class="form-inline">
         <div class="form-group">
           Search
@@ -16,9 +17,9 @@
         </div>
       </div>
 
-      <div class="form-inline">
+      <div class="form-inline" ng-repeat="filter in input.filters">
         <div class="form-group">
-          <ui-select ng-model="input.filters[0].logic" ng-change="indexChanged()" theme="bootstrap" reset-search-input="true">
+          <ui-select ng-model="input.filters[$index].bool" ng-change="indexChanged()" theme="bootstrap" reset-search-input="true">
             <ui-select-match placeholder="Logic">{{$select.selected}}</ui-select-match>
             <ui-select-choices repeat="item in filterLogics | filter: $select.search">
               <div ng-bind-html="trustAsHtml((item | highlight: $select.search))"></div>
@@ -26,26 +27,56 @@
           </ui-select>
         </div>
         <div class="form-group">
-          <ui-select ng-model="input.filters[0].logic" ng-change="indexChanged()" theme="bootstrap" reset-search-input="true">
-            <ui-select-match placeholder="Logic">{{$select.selected}}</ui-select-match>
-            <ui-select-choices repeat="item in filterLogics | filter: $select.search">
+          <ui-select ng-model="input.filters[$index].field" ng-change="fieldChanged($index)" theme="bootstrap" reset-search-input="true">
+            <ui-select-match placeholder="Field">{{$select.selected.label}}</ui-select-match>
+            <ui-select-choices repeat="item in fieldsOptions | filter: $select.search">
+              <div ng-bind-html="trustAsHtml((item.label | highlight: $select.search))"></div>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+        <div class="form-group" ng-if="ops.length">
+          <ui-select ng-model="input.filters[$index].op" ng-change="opChanged($index)" theme="bootstrap" reset-search-input="true">
+            <ui-select-match placeholder="">{{$select.selected}}</ui-select-match>
+            <ui-select-choices repeat="item in ops | filter: $select.search">
               <div ng-bind-html="trustAsHtml((item | highlight: $select.search))"></div>
             </ui-select-choices>
           </ui-select>
         </div>
+        <div class="form-group" ng-if="opIsText($index)">
+          <input class="form-control" ng-model="input.filters[$index].qual" />
+        </div>
         <div class="form-group">
-          <button class="btn btn-default"><i class="fa fa-plus"></i></button>
-          <button class="btn btn-default"><i class="fa fa-minus"></i></button>
+          <button ng-click="btnAddFilterClicked()" class="btn btn-default"><i class="fa fa-plus"></i></button>
+          <button ng-click="btnRemoveFilterClicked()" class="btn btn-default"><i class="fa fa-minus"></i></button>
         </div>
       </div>
 
-      <button class="btn btn-default">Search</button>
+      <button class="btn btn-default" ng-click="btnSearchClicked()">Search</button>
       Output results:
-      <button class="btn btn-default">Search</button>
+      <select ng-model="input.outputResult" ng-options="output for output in outputs"></select>
       Number of results:
-      <button class="btn btn-default">Search</button>
+      <select ng-model="input.nbResults" ng-options="nb for nb in nbResults"></select>
       Show query source:
-      <button class="btn btn-default">Search</button>
+      <input bs-switch ng-model="input.showQuerySource" type="checkbox" switch-size="small" switch-on-text="YES" switch-off-text="NO" ng-change="btnShowQuerySourceChanged()"/>
+
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th ng-repeat="header in table.headers">{{header}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="hit in result.hits.hits">
+              <td ng-repeat="header in table.headers">{{hit[header]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <code><pre>{{result}}</pre></code>
+      </div>
 
     </div>
   </div>
